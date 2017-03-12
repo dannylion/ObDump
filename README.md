@@ -5,7 +5,7 @@ Raw dump of the Windows Object Manager (like Winobj but in cmd)
 Just compile and run it in your machine.
 
 The output format should be:
-	<object path>,<object type>
+	object_path,object_type
 	...
 
 # Credit
