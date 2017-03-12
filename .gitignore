@@ -1,0 +1,5 @@
+/.vs/*
+/ObDump.VC.VC.opendb
+/ObDump.VC.db
+/ObDump.vcxproj.user
+/bin/*
