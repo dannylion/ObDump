@@ -31,24 +31,34 @@
 void
 DumpObjectManager(
 	CObjectManager& tObjManager,
-	const CString& pszRootPath
+	const CString& szRootPath
 )
 {
-	auto items = tObjManager.GetFolders(pszRootPath);
+	auto items = tObjManager.GetFolders(szRootPath);
 
 	for each(auto item in items)
 	{
-		std::cout << pszRootPath << "\\" << item.first << "," << item.second << std::endl;
+		// Print "%(ObjectPath)s,%(ObjectType)s"
+		std::cout << szRootPath << "\\" << item.first << "," << item.second;
 
-		if (item.second == L"Directory")
+		// Print "->%(SymlinkTarget)s\n"
+		CString szLinkTarget = "";
+		if (L"SymbolicLink" == item.second)
 		{
-			if (pszRootPath == L"\\")
+			szLinkTarget = tObjManager.GetSymbolicLinkFromName(szRootPath, item.first);
+			std::cout << "->" << szLinkTarget;
+		}
+		std::cout << std::endl;
+
+		if (L"Directory" == item.second)
+		{
+			if (szRootPath == L"\\")
 			{
-				DumpObjectManager(tObjManager, pszRootPath + item.first);
+				DumpObjectManager(tObjManager, szRootPath + item.first);
 			}
 			else
 			{
-				DumpObjectManager(tObjManager, pszRootPath + L"\\" + item.first);
+				DumpObjectManager(tObjManager, szRootPath + L"\\" + item.first);
 			}
 		}
 	}
