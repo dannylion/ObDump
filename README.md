@@ -5,8 +5,9 @@ Raw dump of the Windows Object Manager (like Winobj but in cmd)
 Just compile and run it in your machine.
 
 The output format should be:
-	object_path,object_type
-	...
+"%(ObjectPath)s,%(ObjectType)s"
+"%(ObjectPath)s,SymbolicLink->%(SymlinkTarget)s"
+...
 
 # Credit
 All credit goes to Pavel Yosifovich:
